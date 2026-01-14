@@ -1,7 +1,6 @@
-import pandas as pd 
+import modes.classic
 
-champions = 'data/champions.json'
+print('=== Modes ===')
+print('1. Classic\n2. Quote\n3. Ability\n4. Emoji\n5. Splash')
 
-df = pd.read_json(champions)
-
-print(df)
+mode = str(input('Enter Mode: '))
