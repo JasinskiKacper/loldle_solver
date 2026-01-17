@@ -15,6 +15,7 @@ class Classic:
 
         filtered = filtering(self.champions, champion, answers)
         
+        
         self.possibilities(filtered)
 
         self.correct()
