@@ -8,16 +8,24 @@ class Classic:
         self.champions = load_champions('data/champions.json')
         
     def start(self) -> None:
-        champion = self.guess()
-        
-        answers = self.correct_wrong()
+        filtered = self.champions
+        clear_terminal()
 
-        filtered = filtering(self.champions, champion, answers)
-        
-        
-        self.possibilities(filtered)
+        while filtered.shape[0] > 1:
 
-        self.correct()
+            champion = self.guess()
+            answers = self.correct_wrong()
+
+            clear_terminal()
+
+            filtered = filtering(filtered, champion, answers)
+            if filtered.shape[0] > 1:
+                self.possibilities(filtered)
+            elif filtered.empty:
+                print("No champions left something went wrong.")
+                break
+
+        self.final_champ(filtered)
 
     def guess(self) -> str:
         champion_name = str(input('Enter your champion: '))
@@ -28,12 +36,19 @@ class Classic:
         return answers
     
     def possibilities(self, filtered: pd.DataFrame) -> None:
-        print('Your posibility guesses:\n')
-        print(filtered.index.to_list())
-        
-    def correct(self) -> None:
-        end = str(input('Are you done?\n'))
-        if end == 'No':
-            self.start()
-        elif end == 'Yes':
-            print('We did it!')
+        print('Your posibility guesses:\n\n')
+        for champ in filtered.index.to_list():
+            print(champ)
+        print('\n')
+
+    def correct(self) -> str:
+        end = str(input('Did you guessed it?\n'))
+        return end
+    
+    def final_champ(self, filtered: pd.DataFrame) -> None:
+        champ = filtered.index[0]
+        print("\n====================")
+        print("🎉 CHAMPION FOUND 🎉")
+        print(f"The answer is: {champ}")
+        print("====================\n")
+            
