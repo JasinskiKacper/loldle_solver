@@ -1,6 +1,5 @@
 import pandas as pd
-from solver.utils import load_champions
-from main import clear_terminal
+from solver.utils import load_champions, clear_terminal
 from solver.logic import filtering
 
 

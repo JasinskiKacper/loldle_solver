@@ -1,13 +1,8 @@
 from modes import classic
-import os
+from solver.utils import clear_terminal
+
+
 mode = ['Classic', 'Quote', 'Ability', 'Emoji', 'Splash']
-
-def clear_terminal():
-    if os.name == 'nt':
-        os.system('cls')
-    else:
-        os.system('clear')
-
 
 
 if __name__ == '__main__':
